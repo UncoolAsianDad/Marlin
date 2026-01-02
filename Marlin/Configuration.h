@@ -1521,11 +1521,11 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { 19, -11, -2 } // G2 { 19, -11, -2 }
+#define NOZZLE_TO_PROBE_OFFSET { 34.64, -20, -2 } // G2 { 19, -11, -2 }
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
-#define PROBING_MARGIN 1
+#define PROBING_MARGIN 10
 
 // X and Y axis travel speed (mm/min) between probes
 #define XY_PROBE_FEEDRATE HOMING_FEEDRATE_Z
@@ -2505,7 +2505,7 @@
  * SD Card support is disabled by default. If your controller has an SD slot,
  * you must uncomment the following option or it won't work.
  */
-#define SDSUPPORT
+// #define SDSUPPORT
 
 /**
  * SD CARD: ENABLE CRC
