@@ -404,7 +404,10 @@ static void center_text(FSTR_P const fstart, const uint8_t y) {
     lcd_moveto(indent, 1); lcd.write(LR);  lcd_put_u8str(F("Marlin")); lcd.write(LR);
     lcd_moveto(indent, 2); lcd.write(BLC); lcd_put_u8str(F("------")); lcd.write(BRC);
     center_text(F(SHORT_BUILD_VERSION), 3);
-    center_text(F(MARLIN_WEBSITE_URL), 4);
+    center_text(F(STRING_BUILD_DATETIME), 4);
+    #if LCD_HEIGHT >= 6
+      center_text(F(MARLIN_WEBSITE_URL), 5);
+    #endif
     picBits = ICON_LOGO;
     lcd.print_screen();
   }

@@ -218,7 +218,7 @@ bool MarlinUI::detected() { return true; }
       u8g.drawBitmapP(offx, offy, START_BMP_BYTEWIDTH, START_BMPHEIGHT, bitmap);
       set_font(FONT_MENU);
       if (!two_part || !line2) lcd_put_u8str(txt_offx_1, txt_base - (MENU_FONT_HEIGHT), F(SHORT_BUILD_VERSION));
-      if (!two_part || line2) lcd_put_u8str(txt_offx_2, txt_base, F(MARLIN_WEBSITE_URL));
+      if (!two_part || line2) lcd_put_u8str(txt_offx_2, txt_base, F(STRING_BUILD_DATETIME));
     };
 
     auto draw_bootscreen_bmp = [&](const uint8_t *bitmap) {

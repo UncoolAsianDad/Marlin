@@ -46,6 +46,13 @@
 #endif
 
 /**
+ * Compile time string combining date and time when the source code was compiled.
+ */
+#ifndef STRING_BUILD_DATETIME
+  #define STRING_BUILD_DATETIME __DATE__ " " __TIME__
+#endif
+
+/**
  * Minimum Configuration.h and Configuration_adv.h file versions.
  * Set based on the release version number. Used to catch an attempt to use
  * older configurations. Override these if using a custom versioning scheme

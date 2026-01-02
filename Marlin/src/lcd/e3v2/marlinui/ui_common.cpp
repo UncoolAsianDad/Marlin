@@ -103,14 +103,20 @@ void MarlinUI::clear_lcd() {
     #if ENABLED(DWIN_MARLINUI_PORTRAIT)
       #define LOGO_CENTER ((LCD_PIXEL_WIDTH) / 2)
       #define INFO_CENTER LOGO_CENTER
+      #define SCREEN_CENTER ((LCD_PIXEL_WIDTH) / 2)
       #define VERSION_Y   330
+      #define DATETIME_Y  360
     #else
       #define LOGO_CENTER (280 / 2)
       #define INFO_CENTER ((LCD_PIXEL_WIDTH) - 200 / 2)
+      #define SCREEN_CENTER ((LCD_PIXEL_WIDTH) / 2)
       #define VERSION_Y   84
+      #define DATETIME_Y  110
     #endif
 
-    DWIN_Draw_String(false, font10x20, Color_Yellow, Color_Bg_Black, INFO_CENTER - (dwin_string.length * 10) / 2, VERSION_Y, S(dwin_string.string()));
+    DWIN_Draw_String(false, font10x20, Color_Yellow, Color_Bg_Black, SCREEN_CENTER - (dwin_string.length * 10) / 2, VERSION_Y, S(dwin_string.string()));
+    dwin_string.set(F(STRING_BUILD_DATETIME));
+    DWIN_Draw_String(false, font10x20, Color_Yellow, Color_Bg_Black, SCREEN_CENTER - (dwin_string.length * 10) / 2, DATETIME_Y, S(dwin_string.string()));
     TERN_(SHOW_CUSTOM_BOOTSCREEN, safe_delay(CUSTOM_BOOTSCREEN_TIMEOUT));
     clear_lcd();
 
@@ -127,7 +133,10 @@ void MarlinUI::clear_lcd() {
       DWIN_ICON_Show(BOOT_ICON, ICON_MarlinURL,  INFO_CENTER - 100 / 2, 152);
       DWIN_ICON_Show(BOOT_ICON, ICON_Copyright,  INFO_CENTER - 126 / 2, 200);
     #endif
-    DWIN_Draw_String(false, font10x20, Color_Yellow, Color_Bg_Black, INFO_CENTER - (dwin_string.length * 10) / 2, VERSION_Y, S(dwin_string.string()));
+    dwin_string.set(F(SHORT_BUILD_VERSION));
+    DWIN_Draw_String(false, font10x20, Color_Yellow, Color_Bg_Black, SCREEN_CENTER - (dwin_string.length * 10) / 2, VERSION_Y, S(dwin_string.string()));
+    dwin_string.set(F(STRING_BUILD_DATETIME));
+    DWIN_Draw_String(false, font10x20, Color_Yellow, Color_Bg_Black, SCREEN_CENTER - (dwin_string.length * 10) / 2, DATETIME_Y, S(dwin_string.string()));
     DWIN_UpdateLCD();
   }
 
