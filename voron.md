@@ -4,15 +4,16 @@
 
 | Item | Detail |
 |------|--------|
-| Machine | Voron 0, print volume **120 × 120 × 120 mm** |
+| Machine | Voron 0 (**CoreXY**), print volume **120 × 120 × 120 mm** |
 | Mainboard | Makerbase **MKS GEN_L V2.1** (`BOARD_MKS_GEN_L_V21`) |
 | Display | **MKS Mini12864 V3.0** (`MKS_MINI_12864_V3`, FYSETC 2.1 pinout) |
-| Stepper drivers | **TMC2208** UART (use same type for TMC2225 modules) |
+| Stepper drivers | **BigTreeTech TMC2208 V3.0** (UART). Marlin: `TMC2208` on X/Y/Z/E0 — same setting as TMC2225 modules. |
 | Motor supply | **12 V** kit PSU → `CHOPPER_TIMING` = `CHOPPER_DEFAULT_12V` |
 
 ## Firmware / build
 
 - **Marlin** 2.1.x in this tree; **PlatformIO** env: `mega2560` (default in `platformio.ini`).
+- **Kinematics:** `#define COREXY` in `Configuration.h` (Voron 0 belt layout). If X/Y move wrong after flashing, use `INVERT_X_DIR` / `INVERT_Y_DIR` or swap to `COREYX` only if your build matches that variant.
 - **SD:** `SDSUPPORT` — use the **SD slot on the LCD**, not only the onboard slot.
 - **NeoPixels (display RGB bar):** `NEOPIXEL_LED`, `NEO_RGB`, `NEOPIXEL_PIXELS` 3; `LED_CONTROL_MENU`, `LED_COLOR_PRESETS`, `LED_USER_PRESET_STARTUP` enabled per Marlin recommendations for this panel.
 
@@ -29,7 +30,7 @@ Defaults in `Configuration.h` were aligned with an **M503** capture from the pre
 
 ## Wiring / pins to double-check
 
-- **TMC UART:** PDN_UART per axis to RAMPS **AUX-2** pairs as in Marlin `pins_RAMPS.h` (`HAS_TMC_UART` defaults for MKS GEN_L).
+- **TMC UART:** PDN_UART per axis to RAMPS **AUX-2** pairs as in Marlin `pins_RAMPS.h` (`HAS_TMC_UART` defaults for MKS GEN_L). On **BTT TMC2208 V3.0**, set the onboard jumpers for **UART mode** per [BIGTREETECH-TMC2208-V3.0](https://github.com/bigtreetech/BIGTREETECH-TMC2208-V3.0) (not standalone STEP/DIR-only). Typical wiring: **1 kΩ** MCU TX → PDN_UART as in Marlin’s TMC UART notes; RX to PDN_UART directly for readback. With **one wire pair per driver** (Marlin’s default here), each module can use **slave address 0**. Sense resistor on these boards is usually **0.11 Ω** (`*_RSENSE` **0.11** in `Configuration_adv.h` — change only if your PCB says otherwise).
 - **Filament runout:** `FILAMENT_RUNOUT_SENSOR` enabled; default RAMPS-style pin is often **SERVO3** (pin **32** on this board). Change `FIL_RUNOUT_PIN` if your sensor is elsewhere, or disable runout if unused.
 - **Filament change:** `ADVANCED_PAUSE_FEATURE` + `NOZZLE_PARK_FEATURE`; runout script **M600** (needs correct sensor pin).
 
