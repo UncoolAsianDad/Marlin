@@ -8,7 +8,7 @@
 | Mainboard | Makerbase **MKS GEN_L V2.1** (`BOARD_MKS_GEN_L_V21`) |
 | Display | **MKS Mini12864 V3.0** (`MKS_MINI_12864_V3`, FYSETC 2.1 pinout) |
 | Stepper drivers | **BigTreeTech TMC2208 V3.0** (UART). Marlin: `TMC2208` on X/Y/Z/E0 — same setting as TMC2225 modules. |
-| Motor supply | **12 V** kit PSU → `CHOPPER_TIMING` = `CHOPPER_DEFAULT_12V` |
+| Motor supply | **24 V** to steppers → `CHOPPER_TIMING` = `CHOPPER_DEFAULT_24V` |
 
 ## Firmware / build
 
